@@ -4,10 +4,13 @@
 	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
 </div>]
 
-[<div class="champ contenu_id_gis[ (#ID_GIS*|strlen|?{'',vide})]">
+<BOUCLE_gis(GIS){id_gis}>
+<div class="champ contenu_id_gis[ (#ID_GIS*|strlen|?{'',vide})]">
 	<label><:initiative:champ_id_gis_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{id_gis} id_gis">(#ID_GIS)</span>
-</div>]
+	<span dir="#LANG_DIR" class="id_gis"><a href="#URL_ECRIRE{gis,id_gis=#ID_GIS}">#TITRE</a></span>
+</div>
+</BOUCLE_gis>
+
 
 [<div class="champ contenu_type_initiative[ (#TYPE_INITIATIVE*|strlen|?{'',vide})]">
 	<label><:initiative:champ_type_initiative_label:> : </label>
