@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	id_initiative,1,
+	points,-1
+}})]<B_liste_initiatives>
+#ANCRE_PAGINATION
+<div class="liste-objets initiatives">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{initiative:info_1_initiative,initiative:info_nb_initiatives}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="titre" scope="col">[(#TRI{titre,<:initiative:champ_titre_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_initiative,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_initiatives(INITIATIVES){id_gis?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{initiative-16.png}|balise_img)]</td>
+			<td class="titre principale">[(#LOGO_INITIATIVE|image_reduire{20,26})]<a href="[(#ID_INITIATIVE|generer_url_entite{initiative})]" title="<:info_numero_abbreviation|attribut_html:> #ID_INITIATIVE">[(#RANG). ]#TITRE</a></td>
+			<td class="id">[(#AUTORISER{modifier,initiative,#ID_INITIATIVE}|?{
+				<a href="[(#URL_ECRIRE{initiative_edit,id_initiative=#ID_INITIATIVE})]">#ID_INITIATIVE</a>,
+				#ID_INITIATIVE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_initiatives>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_initiatives>[
+<div class="liste-objets initiatives caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_initiatives>

@@ -1,0 +1,44 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_initiative,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_initiative" value="#ENV{id_initiative}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{selection, id_gis, obligatoire=oui,
+				label=<:initiative:champ_id_gis_label:>})]
+
+			[(#SAISIE{selection, type_initiative, obligatoire=oui,
+				label=<:initiative:champ_type_initiative_label:>,
+				datas=[(#ARRAY{contact,Groupe de contact,interpellation,Interpellation,motion,Motion})]})]
+
+			[(#SAISIE{date, date_conseil_communal,
+				label=<:initiative:champ_date_conseil_communal_label:>})]
+
+			[(#SAISIE{input, nom_contact, obligatoire=oui,
+				label=<:initiative:champ_nom_contact_label:>})]
+
+			[(#SAISIE{input, prenom_contact, obligatoire=oui,
+				label=<:initiative:champ_prenom_contact_label:>})]
+
+			[(#SAISIE{input, email, obligatoire=oui,
+				label=<:initiative:champ_email_label:>})]
+
+			[(#SAISIE{input, telephone, obligatoire=oui,
+				label=<:initiative:champ_telephone_label:>})]
+
+			[(#SAISIE{textarea, description,
+				label=<:initiative:champ_description_label:>,
+				explication=<:initiative:champ_description_explication:> ,
+				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>
