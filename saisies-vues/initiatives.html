@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_initiatives_selectionnes>
+	<ul>
+	<BOUCLE_initiatives_selectionnes(INITIATIVES){id_initiative IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_INITIATIVE)</li>
+	</BOUCLE_initiatives_selectionnes>
+	</ul>
+	</B_initiatives_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_initiatives_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_initiative_selectionne(INITIATIVES){id_initiative=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_INITIATIVE)</p>
+	</BOUCLE_initiative_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_initiative_selectionne>
+<//B_test_multiple>

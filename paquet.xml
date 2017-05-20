@@ -9,7 +9,7 @@
 	schema="1.0.0" 
 >
 	<!--
-		Paquet généré le 2017-05-20 15:41:07
+		Paquet généré le 2017-05-20 15:52:55
 		(Vous pouvez bien entendu supprimer ces commentaires) 
 	-->
 
@@ -48,4 +48,6 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/communes_hospitalieres.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/communes_hospitalieres.php" /> 
 
+	<menu nom="initiatives" titre="initiative:titre_initiatives" parent="menu_edition" icone="images/initiative-16.png" action="initiatives" /> 
+	<menu nom="initiative_creer" titre="initiative:icone_creer_initiative" parent="outils_rapides" icone="images/initiative-new-16.png" action="initiative_edit" parametres="new=oui" /> 
 </paquet>

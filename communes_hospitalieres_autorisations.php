@@ -42,7 +42,34 @@ function autoriser_communes_hospitalieres_configurer_dist($faire, $type, $id, $q
 // Objet initiatives
 
 
+/**
+ * Autorisation de voir un élément de menu (initiatives)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_initiatives_menu_dist($faire, $type, $id, $qui, $opt) {
+	return true;
+}
 
+
+/**
+ * Autorisation de voir le bouton d'accès rapide de création (initiative)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_initiativecreer_menu_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('creer', 'initiative', '', $qui, $opt);
+}
 
 /**
  * Autorisation de créer (initiative)

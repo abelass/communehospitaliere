@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/initiatives, env, ajax, sinon=<:initiative:info_aucun_initiative:>}>
+
+[(#AUTORISER{creer,initiative})
+	[(#URL_ECRIRE{initiative_edit,new=oui}|icone_verticale{<:initiative:icone_creer_initiative:>,initiative,new,right})]
+]
