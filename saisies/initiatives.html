@@ -4,7 +4,7 @@
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_initiatives(INITIATIVES){id_initiative?}{id_gis?}{recherche?}{tout}{par num titre, titre}>
+	<BOUCLE_initiatives(INITIATIVES){id_initiative?}{id_gis?}{statut?}{recherche?}{tout}{par num titre, titre}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_INITIATIVE"[(#ID_INITIATIVE|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
 		[(#ENV{multiple}|non)

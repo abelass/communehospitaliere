@@ -1,16 +1,30 @@
-<BOUCLE_initiative(INITIATIVES){id_initiative=#ENV{id}}>
+<BOUCLE_initiative(INITIATIVES){id_initiative=#ENV{id}}{statut?}>
 <div class="infos">
 [(#SET{texte_objet,<:initiative:titre_initiative:>})]
 <div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_INITIATIVE</p></div>
 
-	<div class='nb_elements'><!--nb_elements--></div>
+[(#FORMULAIRE_INSTITUER_OBJET{initiatives,#ID_INITIATIVE})]
 
-	[(#AUTORISER{supprimer, initiative, #ID_INITIATIVE}|oui)
-		[(#BOUTON_ACTION{
-			[(#CHEMIN_IMAGE{initiative-del-24.png}|balise_img{<:initiative:supprimer_initiative:>}|concat{' ',#VAL{<:initiative:supprimer_initiative:>}|wrap{<b>}}|trim)],
-			#URL_ACTION_AUTEUR{supprimer_initiative, #ID_INITIATIVE, #URL_ECRIRE{initiatives}},
-			icone s24 horizontale danger initiative-del-24, <:initiative:confirmer_supprimer_initiative:>})]
+<div class='nb_elements'><!--nb_elements--></div>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(INITIATIVES){id_initiative}>
+	[(#VAL{redirect}
+		|generer_url_action{type=initiatives&id=#ID_INITIATIVE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,initiatives,#ID_INITIATIVE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=initiatives&id=#ID_INITIATIVE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
 	]
+<//B_publie>
 
 </div>
 </BOUCLE_initiative>

@@ -56,10 +56,12 @@ function communes_hospitalieres_declarer_tables_objets_sql($tables) {
 			'email'              => 'varchar(255) NOT NULL DEFAULT ""',
 			'telephone'          => 'varchar(255) NOT NULL DEFAULT ""',
 			'description'        => 'text NOT NULL DEFAULT ""',
+			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
 			'maj'                => 'TIMESTAMP'
 		),
 		'key' => array(
 			'PRIMARY KEY'        => 'id_initiative',
+			'KEY statut'         => 'statut',
 		),
 		'titre' => 'titre AS titre, "" AS lang',
 		 #'date' => '',
@@ -67,6 +69,23 @@ function communes_hospitalieres_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description'),
 		'rechercher_champs' => array("titre" => 4, "id_gis" => 4, "type_initiative" => 5, "nom_contact" => 8, "prenom_contact" => 8, "description" => 6),
 		'tables_jointures'  => array(),
+		'statut_textes_instituer' => array(
+			'prepa'    => 'texte_statut_en_cours_redaction',
+			'prop'     => 'texte_statut_propose_evaluation',
+			'publie'   => 'texte_statut_publie',
+			'refuse'   => 'texte_statut_refuse',
+			'poubelle' => 'texte_statut_poubelle',
+		),
+		'statut'=> array(
+			array(
+				'champ'     => 'statut',
+				'publie'    => 'publie',
+				'previsu'   => 'publie,prop,prepa',
+				'post_date' => 'date',
+				'exception' => array('statut','tout')
+			)
+		),
+		'texte_changer_statut' => 'initiative:texte_changer_statut_initiative',
 
 
 	);

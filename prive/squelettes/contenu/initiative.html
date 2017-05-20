@@ -1,0 +1,56 @@
+[(#AUTORISER{voir,initiative,#ID_INITIATIVE}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{initiative}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{initiative}|objet_info{url_edit}})]
+<BOUCLE_initiative(INITIATIVES){id_initiative}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,initiative,#ID_INITIATIVE})
+		[(#ID_INITIATIVE|afficher_qui_edite{initiative}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_initiative=#ID_INITIATIVE}|icone_verticale{<:initiative:icone_modifier_initiative:>,initiative,edit,right ajax preload})]
+		]
+		[(#ID_INITIATIVE|afficher_qui_edite{initiative}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_initiative=#ID_INITIATIVE}|icone_verticale{#ID_INITIATIVE|afficher_qui_edite{initiative},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{initiative-24.png}|balise_img{initiative,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{initiative,#ID_INITIATIVE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/initiative,id=#ID_INITIATIVE,id_initiative=#ID_INITIATIVE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,initiative,#ID_INITIATIVE})
+	[(#ID_INITIATIVE|afficher_qui_edite{initiative}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_initiative=#ID_INITIATIVE}|icone_verticale{<:initiative:icone_modifier_initiative:>,initiative,edit,right ajax preload})]
+	]
+	[(#ID_INITIATIVE|afficher_qui_edite{initiative}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_initiative=#ID_INITIATIVE}|icone_verticale{#ID_INITIATIVE|afficher_qui_edite{initiative},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,initiative,id,#ID_INITIATIVE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/initiative-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/initiative-enfants,id_initiative,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,initiative,id_initiative,#ID_INITIATIVE,objet,initiative,id_objet,#ID_INITIATIVE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_initiative>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_initiative>

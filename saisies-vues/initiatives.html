@@ -3,7 +3,7 @@
 	<B_initiatives_selectionnes>
 	<ul>
 	<BOUCLE_initiatives_selectionnes(INITIATIVES){id_initiative IN #GET*{valeur}}
-		{par num titre, titre}{tout}>
+		{par num titre, titre}{statut?}{tout}>
 		<li class="choix">#TITRE (#ID_INITIATIVE)</li>
 	</BOUCLE_initiatives_selectionnes>
 	</ul>
@@ -12,7 +12,7 @@
 	<//B_initiatives_selectionnes>
 </BOUCLE_test_multiple>
 	<BOUCLE_initiative_selectionne(INITIATIVES){id_initiative=#ENV{valeur}}
-		{par num titre, titre}{tout}>
+		{par num titre, titre}{statut?}{tout}>
 	  	<p>#TITRE (#ID_INITIATIVE)</p>
 	</BOUCLE_initiative_selectionne>
    	[(#ENV*{sans_reponse}|propre)]
