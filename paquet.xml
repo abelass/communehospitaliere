@@ -42,6 +42,7 @@
 
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 	<necessite nom="verifier" compatibilite="[1.0.6;]" />
+	<necessite nom="gis_communes_belges" compatibilite="[1.0.1;]" />
 
 	<pipeline nom="autoriser" inclure="communes_hospitalieres_autorisations.php" />
 

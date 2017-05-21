@@ -1,4 +1,5 @@
-<BOUCLE_principale(INITIATIVES) {id_initiative} {si #ENV{editer}|non}>
+#ENV
+<BOUCLE_principale(INITIATIVES) {id_initiative} {si #ENV{editer}|=={new}|non}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 [(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
 ]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
@@ -9,97 +10,119 @@
 <head>
 	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
 	<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
-	[<link rel="canonical" href="(#URL_ARTICLE|url_absolue)" />]
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="title" content="#NOM_SITE_SPIP">
+	<meta name="description" content="[(#SLOGAN_SITE_SPIP|textebrut)]">
+	<meta name="author" content="#NOM_SITE_SPIP">
+
+	<B_mots>
+	<meta name="keywords" content="<BOUCLE_mots(MOTS){id_groupe=1}{', '}>#TITRE</BOUCLE_mots>" />
+	</B_mots>
+
+	<meta name="generator" content="SPIP[ (#SPIP_VERSION)]">
+	[<meta name="reply-to" content="(#EMAIL_WEBMASTER|attribut_html)">]
+	<meta name="ROBOTS" content="INDEX,FOLLOW">
+	<meta name="revisit-after" content="7 days">
+	<meta name="robots" content="ALL">
+
+	<meta property="og:title" content="[(#TITRE)]">
+	<meta property="og:site_name" content="#NOM_SITE_SPIP">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="#URL_SITE_SPIP">
+	<meta property="og:image" content="[(#URL_SITE_SPIP|url_absolue)]IMG/[(#LOGO_SITE_SPIP|fichier)]">
+	<meta property="og:description" content="[(#SLOGAN_SITE_SPIP|textebrut)]">
 	<INCLURE{fond=inclure/head} />
 </head>
 
-<body class="pas_surlignable page_initiative">
-<div class="page">
-
-	<INCLURE{fond=inclure/header} />
-	<INCLURE{fond=inclure/nav,env} />
-
-	<div class="main">
-		[(#REM) Contenu principal : contenu de l'initiative]
-		<div class="wrapper hfeed">
-		<div class="content hentry" id="content">
-			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
-			[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
-			[(#AUTORISER{modifier,initiative,#ID_INITIATIVE})
-				[(#URL_INITIATIVE|parametre_url{editer,#ID_INITIATIVE}|icone_verticale{<:initiative:icone_modifier_initiative:>,initiative,edit,right ajax preload})]
+<body id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
+	<div class="wrapper">
+		<INCLURE{fond=inclure/header,env} />
+			<!--=== Breadcrumbs ===-->
+			<div class="breadcrumbs">
+					<div class="container">
+							<ul class="pull-right breadcrumb">
+									<li> <a href="#URL_PAGE{sommaire}" title="<:accueil:>"><i class="fa fa-home"></i></a></li>
+									[<li> (#TITRE|couper{35})</li>]
+							</ul>
+					</div><!--/container-->
+			</div><!--/breadcrumbs-->
+			<!--=== End Breadcrumbs ===-->
+		<div class="row bg_logo padding-bottom-150">
+			<div class="container content">
+			[(#ENV{editer}|non)
+				<INCLURE{fond=inclure/initiative_contenu,env,ajax}/>
+			]
+			[(#ENV{editer}|oui)
+				<INCLURE{fond=inclure/initiative_editer,env,ajax}/>
 			]
 
-			<div class="cartouche clearfix">
-				<h1 class="#EDIT{titre} surlignable">[(#LOGO_INITIATIVE|image_reduire{150,*}) ]#TITRE</h1>
-			</div>
-			<BOUCLE_gis(GIS){id_gis}>
+			</div><!--.content-->
 
-				[(#INCLURE{fond=modeles/carte_gis,id_gis=#ID_GIS,autocenterandzoom=oui,zoom=8})]
-			</BOUCLE_gis>
+		</div><!--.main-->
+		<INCLURE{fond=inclure/mailchimp,env} />
+		[(#REM) Footer ]
+		<INCLURE{fond=inclure/footer} {ajax}><INCLURE{fond=inclure/footer,self=#SELF} />
+	</div><!--.wrapper-->
 
-			[<div class="champ contenu_type_initiative[ (#TYPE_INITIATIVE*|strlen|?{'',vide})]">
-				<label><:initiative:champ_type_initiative_label:> : </label>
-				<span dir="#LANG_DIR" class="#EDIT{type_initiative} type_initiative">(#TYPE_INITIATIVE)</span>
-			</div>]
+<!-- JS Global Compulsory -->
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/jquery/jquery-migrate.min.js}"></script>
 
-			[<div class="champ contenu_date_conseil_communal[ (#DATE_CONSEIL_COMMUNAL*|!={0000-00-00 00:00:00}|?{'',vide})]">
-				<label><:initiative:champ_date_conseil_communal_label:> : </label>
-				<span dir="#LANG_DIR" class="#EDIT{date_conseil_communal} date_conseil_communal">(#DATE_CONSEIL_COMMUNAL|=={0000-00-00 00:00:00}|?{'',[(#DATE_CONSEIL_COMMUNAL|affdate)]})</span>
-			</div>]
+<script src="#CHEMIN{unify/assets/plugins/master-slider/masterslider/jquery.easing.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/smoothScroll.js}"></script>
 
-			[<div class="champ contenu_nom_contact[ (#NOM_CONTACT*|strlen|?{'',vide})]">
-				<label><:initiative:champ_nom_contact_label:> : </label>
-				<span dir="#LANG_DIR" class="#EDIT{nom_contact} nom_contact">(#NOM_CONTACT)</span>
-			</div>]
+<!-- JS Implementing Plugins from Unify-->
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/back-to-top.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/counter/waypoints.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/masonry/jquery.masonry.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/wow-animations/js/wow.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/wow/wow-ini-themes.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/skrollr/skrollr-ini.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/counter/jquery.counterup.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/jquery.mixitup.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/masonry/masonry.pkgd.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/masonry/imagesloaded.pkgd.min.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js}"></script>
 
-			[<div class="champ contenu_prenom_contact[ (#PRENOM_CONTACT*|strlen|?{'',vide})]">
-				<label><:initiative:champ_prenom_contact_label:> : </label>
-				<span dir="#LANG_DIR" class="#EDIT{prenom_contact} prenom_contact">(#PRENOM_CONTACT)</span>
-			</div>]
+<!-- JS Page Level -->
+<script src="#CHEMIN{js/custom.app.js}" type="text/javascript"></script>
+<!-- Version adaptée d'une partie de /Unify-v1.9.4/HTML/Blog-Magazine/assets/js/app.js-->
+<script type="text/javascript" src="#CHEMIN{unify/assets/js/plugins/cube-portfolio/cube-portfolio-3.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/js/pages/page_portfolio.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/js/plugins/cube-portfolio/cube-portfolio-6.js}"></script>
+<script type="text/javascript" src="#CHEMIN{unify/assets/js/plugins/owl-carousel.js}"></script>
 
-			[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
-				<label><:initiative:champ_email_label:> : </label>
-				<span dir="#LANG_DIR" class="#EDIT{email} email">(#EMAIL)</span>
-			</div>]
+<!-- JS Customization -->
+<script src="#CHEMIN{js/custom.app.js}" type="text/javascript"></script>
+<!-- Version adaptée d'une partie de /Unify-v1.9.4/HTML/Blog-Magazine/assets/js/app.js-->
+<script src="#CHEMIN{js/custom.owl-carousel.js}" type="text/javascript"></script>
+<!-- Version adaptée  de /Unify-v1.9.4/HTML/Blog-Magazine/assets/js/plugins/owl-carousel.js-->
+<script src="#CHEMIN{js/custom.masonry.js}" type="text/javascript"></script>
+<!-- Version adaptée  de /Unify-v1.9.4/HTML/Blog-Magazine/assets/js/plugins/blog-masonry.js-->
+<script src="#CHEMIN{js/custom.cube-portfolio-lightbox.js}" type="text/javascript"></script>
+<!-- Version adaptée  de /Unify-v1.9.4/HTML/assets/js/plugins/cube-portfolio/cube-portfolio-lightbox.js-->
 
-			[<div class="champ contenu_telephone[ (#TELEPHONE*|strlen|?{'',vide})]">
-				<label><:initiative:champ_telephone_label:> : </label>
-				<span dir="#LANG_DIR" class="#EDIT{telephone} telephone">(#TELEPHONE)</span>
-			</div>]
-
-			[<div class="champ contenu_description[ (#DESCRIPTION*|strlen|?{'',vide})]">
-				<label><:initiative:champ_description_label:> : </label>
-				<span dir="#LANG_DIR" class="#EDIT{description} description">(#DESCRIPTION)</span>
-			</div>]
-
-
-			[(#REM) Gestion du portfolio et des documents ]
-			[(#INCLURE{fond=inclure/documents,id_initiative,id_rubrique='',env})]
-
-
-
-			[<div class="notes"><hr />(#NOTES)</div>]
-
-
-		</div><!--.content-->
-		</div><!--.wrapper-->
-
-
-		<div class="aside">
-
-
-		</div><!--.aside-->
-	</div><!--.main-->
-
-	<INCLURE{fond=inclure/footer,self=#SELF} />
-
-</div><!--.page-->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+				App.init();
+				MasonryBox.initMasonryBox();
+				OwlCarousel.initOwlCarousel4();
+				OwlCarousel.initOwlCarousel4bis();
+				new WOW().init();
+				PortfolioPage.init();
+		});
+</script>
+<!--[if lt IE 9]>
+		<script src="#CHEMIN{unify/assets/plugins/respond.js})"></script>
+		<script src="#CHEMIN{unify/assets/plugins/html5shiv.js}"></script>
+		<script src="#CHEMIN{unify/assets/plugins/placeholder-IE-fixes.js}"></script>
+<![endif]-->
 </body>
 </html>
 </BOUCLE_principale>
-[(#ENV{editer}|=={new}|?{
-	#INCLURE{fond=inclure/ajouter_initiative,env},
-	#INCLURE{fond=inclure/editer_initiative,env}
-})]
+	<INCLURE{fond=initiative_ajouter,env}/>
 <//B_principale>

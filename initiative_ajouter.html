@@ -1,3 +1,4 @@
+[(#AUTORISER{creer,initiative}|sinon_interdire_acces)]
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 [(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
 ]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
@@ -7,7 +8,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
 	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-	<title>Vos Initiatives - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<title>Ajouter une initiative [(#NOM_SITE_SPIP|textebrut)]</title>
 	<!-- Meta -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,13 +20,20 @@
 	<meta name="keywords" content="<BOUCLE_mots(MOTS){id_groupe=1}{', '}>#TITRE</BOUCLE_mots>" />
 	</B_mots>
 
-	<meta property="og:title" content="#NOM_SITE_SPIP">
+	<meta name="generator" content="SPIP[ (#SPIP_VERSION)]">
+	[<meta name="reply-to" content="(#EMAIL_WEBMASTER|attribut_html)">]
+	<meta name="ROBOTS" content="INDEX,FOLLOW">
+	<meta name="revisit-after" content="7 days">
+	<meta name="robots" content="ALL">
+
+	<meta property="og:title" content="[(#TITRE)]">
 	<meta property="og:site_name" content="#NOM_SITE_SPIP">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="#URL_SITE_SPIP">
-	<meta property="og:image" content="[(#URL_SITE_SPIP|url_absolue)]/IMG/[(#LOGO_SITE_SPIP|fichier)]">
+	<meta property="og:image" content="[(#URL_SITE_SPIP|url_absolue)]IMG/[(#LOGO_SITE_SPIP|fichier)]">
 	<meta property="og:description" content="[(#SLOGAN_SITE_SPIP|textebrut)]">
-	<INCLURE{fond=inclure/head} />
+
+	<INCLURE{fond=inclure/head, env} />
 </head>
 
 <body id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
@@ -36,36 +44,24 @@
 					<div class="container">
 							<ul class="pull-right breadcrumb">
 									<li> <a href="#URL_PAGE{sommaire}" title="<:accueil:>"><i class="fa fa-home"></i></a></li>
-									<li> Initiatives</li>
+									<li> Ajouter une initiative</li>
 							</ul>
 					</div><!--/container-->
 			</div><!--/breadcrumbs-->
 			<!--=== End Breadcrumbs ===-->
 		<div class="row bg_logo padding-bottom-150">
-			<div class="container content">
 			[(#REM) Contenu principal : contenu de l'initiative]
-				<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
-				[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
-				[(#AUTORISER{creer,initiative})
-					[(#URL_PAGE{initiative}|parametre_url{editer,new}|icone_verticale{<:initiative:icone_creer_initiative:>,initiative,new,right})]
-				]
-				<h1 class="margin-bottom-50">Vos Initiatives</h1>
-
-				<B_principale>
-					<ul class="liste-items">
-				<BOUCLE_principale(INITIATIVES) {id_auteur=#SESSION{id_auteur}} {tout}>
-					<li><a href="#URL_INITIATIVE">#TITRE</a> - <a href="#URL_INITIATIVE">Editer</a></li>
-				</BOUCLE_principale>
-				</ul>
-				<B_principale>
-				Vous n'avez pas d'initiatives
-				<//B_principale>
-			</div><!--.content-->
-			<INCLURE{fond=inclure/mailchimp,env} />
-			[(#REM) Footer ]
-			<INCLURE{fond=inclure/footer} {ajax}>
-		<div>
-	</div><!-- wrapper-->
+			<div class="container content">
+				<h1 class="#EDIT{titre} margin-bottom-50">Ajouter une initiative</h1>
+				<div class="ajax">
+					#FORMULAIRE_EDITER_INITIATIVE{new}
+				</div>
+			</div><!--.container content-->
+		</div><!--.row bg_logo padding-bottom-150-->
+		<INCLURE{fond=inclure/mailchimp,env} />
+		[(#REM) Footer ]
+		<INCLURE{fond=inclure/footer} {ajax}>
+	</div><!--.wrapper-->
 <!-- JS Global Compulsory -->
 <script type="text/javascript" src="#CHEMIN{unify/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
 <script type="text/javascript" src="#CHEMIN{unify/assets/plugins/jquery/jquery-migrate.min.js}"></script>
@@ -122,3 +118,4 @@
 <![endif]-->
 </body>
 </html>
+

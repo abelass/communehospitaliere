@@ -1,0 +1,9 @@
+<BOUCLE_principale(INITIATIVES) {id_initiative}{statut?}>1
+[(#AUTORISER{modifier,initiative,#ID_INITIATIVE})
+	[(#URL_INITIATIVE|icone_verticale{[(#VAL{initiative}|objet_info{texte_retour}|_T)],#VAL{initiative}|objet_info{icone_objet},'',right retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[<h1 class"#EDIT{titre} margin-bottom-50">(#TITRE)</h1>]
+	<div class="ajax">
+		#FORMULAIRE_EDITER_INITIATIVE{#ID_INITIATIVE, #URL_INITIATIVE}
+	</div>
+]
+</BOUCLE_principale>
