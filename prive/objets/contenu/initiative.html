@@ -22,10 +22,10 @@
 	<span dir="#LANG_DIR" class="#EDIT{date_conseil_communal} date_conseil_communal">(#DATE_CONSEIL_COMMUNAL|=={0000-00-00 00:00:00}|?{'',[(#DATE_CONSEIL_COMMUNAL|affdate)]})</span>
 </div>]
 
-[<div class="champ contenu_note[ (#NOTE*|strlen|?{'',vide})]">
+<div class="champ contenu_note[ (#NOTE*|strlen|?{'',vide})]">
 	<label><:initiative:champ_note_label:> : </label>
 	<INCLURE{fond=inclure/note,note}/>
-</div>]
+</div>
 
 
 [<div class="champ contenu_nom_contact[ (#NOM_CONTACT*|strlen|?{'',vide})]">

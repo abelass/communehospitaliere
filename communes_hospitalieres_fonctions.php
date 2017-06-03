@@ -24,7 +24,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function nom_note($note) {
 	include_spip('inc/communehospitaliere');
 	$definition_notes = ch_definitions_notes();
-	return $definition_notes[$note];
+	$nom = isset($definition_notes[$note]) ? $definition_notes[$note] : $note;
+	return $nom;
 }
 
 /**
@@ -38,6 +39,7 @@ function nom_note($note) {
 function nom_type_initiative($type) {
 	include_spip('inc/communehospitaliere');
 	$definitions_initiatives= ch_definitions_initiatives();
-	return $definitions_initiatives[$type]['label'];
+	$nom = isset($definitions_initiatives[$type]) ? $definitions_initiatives[$type]['label']: $type;
+	return $nom;
 }
 

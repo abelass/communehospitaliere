@@ -1,3 +1,4 @@
-<BOUCLE_enumere(DATA){enum 1, #NOTE}>
-	<img src="#CHEMIN{images/star-#ENV{taille,15}.png}" alt="étoile" title="[(#VALEUR|nom_note)]" />
+<BOUCLE_enumere(DATA){source tableau, #REM|ch_definitions_notes}>
+[(#CLE|<={#NOTE}|?{#SET{nom,star}, #SET{nom,star-grey}})]
+	<img src="[(#CHEMIN{images/[(#GET{nom}|concat{-#ENV{taille,15}.png})]})]" alt="étoile" title="#VALEUR" />
 </BOUCLE_enumere>
