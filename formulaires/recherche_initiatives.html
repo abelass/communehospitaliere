@@ -1,0 +1,18 @@
+<div class="formulaire_spip formulaire_initiatives" id="formulaire_recherche_initiatives">
+	<form action="#SELF" method="get">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>
+			<ul class="editer-groupe">
+				<li class="editer editer_recherche main">
+					<label for="recherche"><:info_rechercher_02:></label>
+					<input type="[(#HTML5|?{search,text})]" class="search text" size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off"/>
+				</li>
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:info_rechercher:>" />
+			</p>
+			[(#REM) Articles trouves ]
+			<INCLURE{fond=formulaires/inc-rechercher_initiatives_resultat,env,ajax}/>
+		</div>
+	</form>
+</div>
+

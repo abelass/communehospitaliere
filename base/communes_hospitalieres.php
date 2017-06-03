@@ -65,6 +65,9 @@ function communes_hospitalieres_declarer_tables_objets_sql($tables) {
 			'KEY statut'         => 'statut',
 			'KEY id_gis'         => 'is_gis',
 		),
+		'join' => array(
+			'id_gis' => 'id_gis'
+		),
 		'titre' => 'titre AS titre, "" AS lang',
 		#'date' => '',
 		'champs_editables'  => array('titre', 'id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description', 'note'),
