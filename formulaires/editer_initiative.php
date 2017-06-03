@@ -117,9 +117,16 @@ function formulaires_editer_initiative_verifier_dist($id_initiative = 'new', $re
 
 	$erreurs += formulaires_editer_objet_verifier('initiative', $id_initiative, array('id_gis', 'type_initiative', 'nom_contact', 'prenom_contact', 'email', 'telephone'));
 
+	// Ne pas réutiliser une copmmune.
 	if ($id_gis = _request('id_gis')) {
-		if (is_integer($id_initiative) AND
-				sql_getfetsel('id_initiative', 'spip_initiatives', 'id_initiative !=' . $id_initiative . ' AND id_gis=' . $id_gis)) {
+		if ($id_initiative != 'new') {
+			$where = 'id_initiative !=' . $id_initiative . ' AND id_gis=' . $id_gis;
+		}
+		else {
+			$where = 'id_gis=' . $id_gis;
+		}
+
+		if (sql_getfetsel('id_initiative', 'spip_initiatives', $where)) {
 			$erreurs['id_gis'] = _T('initiative:message_erreur_point_gis_choisis');
 		}
 		else {
