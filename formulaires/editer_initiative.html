@@ -13,7 +13,8 @@
 
 			[(#SAISIE{selection, type_initiative, obligatoire=oui,
 				label=<:initiative:champ_type_initiative_label:>,
-				datas=[(#ARRAY{contact,Groupe de contact,interpellation,Interpellation,motion,Motion})]})]
+				datas=#ENV{_valeurs_type_initiative}
+				})]
 
 			[(#SAISIE{date, date_conseil_communal,
 				label=<:initiative:champ_date_conseil_communal_label:>})]
@@ -42,3 +43,40 @@
 	</div></form>
 	]
 </div>
+
+<script type="text/javascript">
+	var cacherDefaut = ['date_conseil_communal', 'note'];
+
+	cacherChamps(cacherDefaut);
+
+	$( "#champ_type_initiative" ).change(function() {
+		montrerChamps(cacherDefaut);
+		cacherChamps(cacherDefaut);
+		});
+
+	function cacherChamps(cacherDefaut) {
+		var champs = {
+				contact: {cacher : cacherDefaut},
+				interpellation: {cacher: ['note']},
+				motion : {cacher:[]}
+		}
+
+		var type_initative = $('#champ_type_initiative').val();
+		var cacher = cacherDefaut;
+		if (type_initative) {
+			cacher = champs[type_initative]['cacher'];
+		}
+
+		$.each(cacher,function(index, value) {
+			$('.editer_' + value).hide();
+		});
+	}
+
+	function montrerChamps(cacherDefaut) {
+		$.each(cacherDefaut,function(index, value) {
+			console.log('.editer_' + value);
+			$('.editer_' + value).show();
+		});
+	}
+</script>
+</B_champs>

@@ -62,7 +62,14 @@ function formulaires_editer_initiative_identifier_dist($id_initiative = 'new', $
  *     Environnement du formulaire
  */
 function formulaires_editer_initiative_charger_dist($id_initiative = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	include_spip('inc/communehospitaliere');
 	$valeurs = formulaires_editer_objet_charger('initiative', $id_initiative, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	$definition_initiatives = ch_definitions_initiatives();
+	foreach ($definition_initiatives AS $nom => $valeur) {
+		$valeurs['_valeurs_type_initiative'][$nom] = $valeur['label'];
+	}
+
+
 	return $valeurs;
 }
 
@@ -106,10 +113,25 @@ function formulaires_editer_initiative_verifier_dist($id_initiative = 'new', $re
 		}
 	}
 
-	$titre = sql_getfetsel('titre', 'spip_gis', 'id_gis=' . _request('id_gis'));
-	set_request('titre', $titre);
 
 	$erreurs += formulaires_editer_objet_verifier('initiative', $id_initiative, array('id_gis', 'type_initiative', 'nom_contact', 'prenom_contact', 'email', 'telephone'));
+
+	if ($id_gis = _request('id_gis')) {
+		if (is_integer($id_initiative) AND
+				sql_getfetsel('id_initiative', 'spip_initiatives', 'id_initiative !=' . $id_initiative . ' AND id_gis=' . $id_gis)) {
+			$erreurs['id_gis'] = _T('initiative:message_erreur_point_gis_choisis');
+		}
+		else {
+			set_request('titre', sql_getfetsel('titre', 'spip_gis', 'id_gis=' . $id_gis));
+		}
+	}
+
+	// Définir les styles spñecifique dy type d'initiative pour le point gis.
+	if ($type_initiative = _request('type_initiative')) {
+		include_spip('inc/communehospitaliere');
+		$definition_initiatives = ch_definitions_initiatives();
+		set_request('styles_gis', $definition_initiatives[$type_initiative]['styles']);
+	}
 
 	return $erreurs;
 }
@@ -137,6 +159,9 @@ function formulaires_editer_initiative_verifier_dist($id_initiative = 'new', $re
  *     Retours des traitements
  */
 function formulaires_editer_initiative_traiter_dist($id_initiative = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	include_spip('action/editer_gis');
 	$retours = formulaires_editer_objet_traiter('initiative', $id_initiative, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
+	gis_modifier(_request('id_gis'), _request('styles_gis'));
 	return $retours;
 }

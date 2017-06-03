@@ -32,6 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_initiatives_auteur' => 'Les initiatives de cet auteur',
 	'info_nb_initiatives' => '@nb@ initiatives',
 
+	// M
+	'message_erreur_point_gis_choisis' => 'Commune déjà choisis, veuillez en choisir une autre!',
+
 	// R
 	'retirer_lien_initiative' => 'Retirer cette initiative',
 	'retirer_tous_liens_initiatives' => 'Retirer toutes les initiatives',
@@ -47,6 +50,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_initiative' => 'Initiative',
 	'titre_initiatives' => 'Initiatives',
 	'titre_initiatives_rubrique' => 'Initiatives de la rubrique',
+	'titre_type_initiative_contact' => 'Groupe de contact',
+	'titre_type_initiative_interpellation' => 'Interpellation',
+	'titre_type_initiative_motion' => 'Motion',
 	'titre_langue_initiative' => 'Langue de cette initiative',
 	'titre_logo_initiative' => 'Logo de cette initiative',
 	'titre_objets_lies_initiative' => 'Liés à cette initiative',
