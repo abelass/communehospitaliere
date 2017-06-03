@@ -52,7 +52,7 @@
 	</div>]
 
 	[(#REM) Gestion du portfolio et des documents ]
-	[(#INCLURE{fond=inclure/documents,id_initiative,env})]
+	[(#INCLURE{fond=inclure/documents,objet=initiative,id_objet=#ID_INITIATIVE,env})]
 
 	[<div class="notes"><hr />(#NOTES)</div>]
 </BOUCLE_principale>
