@@ -19,6 +19,10 @@
 			[(#SAISIE{date, date_conseil_communal,
 				label=<:initiative:champ_date_conseil_communal_label:>})]
 
+			[(#SAISIE{radio, note,
+				label=<:initiative:champ_note_label:>,
+				datas=#ENV{_valeurs_note}})]
+
 			[(#SAISIE{input, nom_contact, obligatoire=oui,
 				label=<:initiative:champ_nom_contact_label:>})]
 

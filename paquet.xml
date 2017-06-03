@@ -6,7 +6,7 @@
 	compatibilite="[3.1.4;3.1.*]"
 	logo="prive/themes/spip/images/communes_hospitalieres-64.png"
 	documentation=""
-	schema="1.0.1"
+	schema="1.0.2"
 >
 	<!--
 		Paquet généré le 2017-05-20 17:06:37

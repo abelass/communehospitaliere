@@ -55,6 +55,7 @@ function communes_hospitalieres_declarer_tables_objets_sql($tables) {
 			'prenom_contact'     => 'varchar(255) NOT NULL DEFAULT ""',
 			'email'              => 'varchar(255) NOT NULL DEFAULT ""',
 			'telephone'          => 'varchar(255) NOT NULL DEFAULT ""',
+			'note'     					 => 'int(1) NOT NULL',
 			'description'        => 'text NOT NULL DEFAULT ""',
 			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
 			'maj'                => 'TIMESTAMP'
@@ -62,13 +63,14 @@ function communes_hospitalieres_declarer_tables_objets_sql($tables) {
 		'key' => array(
 			'PRIMARY KEY'        => 'id_initiative',
 			'KEY statut'         => 'statut',
+			'KEY id_gis'         => 'is_gis',
 		),
 		'titre' => 'titre AS titre, "" AS lang',
-		 #'date' => '',
-		'champs_editables'  => array('titre', 'id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description'),
-		'champs_versionnes' => array('id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description'),
+		#'date' => '',
+		'champs_editables'  => array('titre', 'id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description', 'note'),
+		'champs_versionnes' => array('id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description', 'note'),
 		'rechercher_champs' => array("titre" => 4, "id_gis" => 4, "type_initiative" => 5, "nom_contact" => 8, "prenom_contact" => 8, "description" => 6),
-		'tables_jointures'  => array(),
+		'tables_jointures'  => array('spip_gis'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',

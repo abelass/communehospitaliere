@@ -51,3 +51,11 @@ function ch_definitions_initiatives() {
 		)
 	);
 }
+
+function ch_definitions_notes() {
+	return array (
+		1 => _T('initiative:titre_note_1'),
+		2 => _T('initiative:titre_note_2'),
+		3 => _T('initiative:titre_note_3'),
+	);
+}

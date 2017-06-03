@@ -69,6 +69,7 @@ function formulaires_editer_initiative_charger_dist($id_initiative = 'new', $ret
 		$valeurs['_valeurs_type_initiative'][$nom] = $valeur['label'];
 	}
 
+	$valeurs['_valeurs_note'] = ch_definitions_notes();
 
 	return $valeurs;
 }

@@ -13,11 +13,31 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
-/*
- * Un fichier de fonctions permet de définir des éléments
- * systématiquement chargés lors du calcul des squelettes.
+/**
+ * Retourne le nom de la Note.
  *
- * Il peut par exemple définir des filtres, critères, balises, …
- * 
+ * @param integer $note.
+ *
+ * @return string
+ *
  */
+function nom_note($note) {
+	include_spip('inc/communehospitaliere');
+	$definition_notes = ch_definitions_notes();
+	return $definition_notes[$note];
+}
+
+/**
+ * Retourne le nom de l'initiative.
+ *
+ * @param string $type.
+ *
+ * @return string
+ *
+ */
+function nom_type_initiative($type) {
+	include_spip('inc/communehospitaliere');
+	$definitions_initiatives= ch_definitions_initiatives();
+	return $definitions_initiatives[$type]['label'];
+}
+

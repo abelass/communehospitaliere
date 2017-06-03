@@ -14,13 +14,19 @@
 
 [<div class="champ contenu_type_initiative[ (#TYPE_INITIATIVE*|strlen|?{'',vide})]">
 	<label><:initiative:champ_type_initiative_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{type_initiative} type_initiative">(#TYPE_INITIATIVE)</span>
+	<span dir="#LANG_DIR" class="#EDIT{type_initiative} type_initiative">(#TYPE_INITIATIVE|nom_type_initiative)</span>
 </div>]
 
 [<div class="champ contenu_date_conseil_communal[ (#DATE_CONSEIL_COMMUNAL*|!={0000-00-00 00:00:00}|?{'',vide})]">
 	<label><:initiative:champ_date_conseil_communal_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{date_conseil_communal} date_conseil_communal">(#DATE_CONSEIL_COMMUNAL|=={0000-00-00 00:00:00}|?{'',[(#DATE_CONSEIL_COMMUNAL|affdate)]})</span>
 </div>]
+
+[<div class="champ contenu_note[ (#NOTE*|strlen|?{'',vide})]">
+	<label><:initiative:champ_note_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{note} nom_contact">(#NOTE|nom_note)</span>
+</div>]
+
 
 [<div class="champ contenu_nom_contact[ (#NOM_CONTACT*|strlen|?{'',vide})]">
 	<label><:initiative:champ_nom_contact_label:> : </label>
