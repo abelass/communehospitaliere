@@ -23,6 +23,17 @@
 				label=<:initiative:champ_note_label:>,
 				datas=#ENV{_valeurs_note}})]
 
+			[(#REM) pas utilisé pour le moment
+			<div class="editer editer_nom_contact obligatoire saisie_input">
+				<label for="fichier_initiative"><:formupload:choosefiles:></label>
+				<input
+					type="file"
+					id="fichier_initiative"
+					name="fichier\[\]"
+					[ accept="(#CONFIG{formulaireupload/files_accepted})"]
+					[ maxlength="(#CONFIG{formulaireupload/files_number})"] />
+			</div>]
+
 			[(#SAISIE{input, nom_contact, obligatoire=oui,
 				label=<:initiative:champ_nom_contact_label:>})]
 
@@ -39,6 +50,7 @@
 				label=<:initiative:champ_description_label:>,
 				explication=<:initiative:champ_description_explication:> ,
 				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+
 
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
