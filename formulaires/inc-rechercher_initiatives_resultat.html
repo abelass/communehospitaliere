@@ -1,14 +1,15 @@
+#CACHE{0}
 <B_initiatives>
 <section class="liste articles sommaire">
-	#ANCRE_PAGINATION
-<BOUCLE_initiatives(GIS INITIATIVES){recherche ?} {par titre} {pagination 20}>
+<BOUCLE_initiatives(GIS){recherche ?} {par titre}>
+	<BOUCLE_initiative(INITIATIVES){id_gis=#ID_GIS}>
 	<div>
 		<span class="titre">
 			<a href="#URL_INITIATIVE">#TITRE</a>
 		</span>
 		<span class="code_postal">#CODE_POSTAL</span>
 	</div>
+	</BOUCLE_initiative>
 </BOUCLE_initiatives>
-	[<div class="pagination">(#PAGINATION)</div>]
 </section>
 </B_initiatives>
