@@ -51,15 +51,11 @@
 				]
 				<h1 class="margin-bottom-50">Vos Initiatives</h1>
 
-				<B_principale>
-					<ul class="liste-items">
-				<BOUCLE_principale(INITIATIVES) {id_auteur=#SESSION{id_auteur}} {tout}>
-					<li><a href="#URL_INITIATIVE">#TITRE</a> - <a href="[(#URL_INITIATIVE|parametre_url{editer,#ID_INITIATIVE})]">Editer</a></li>
-				</BOUCLE_principale>
-				</ul>
-				<B_principale>
-				Vous n'avez pas d'initiatives
-				<//B_principale>
+				<BOUCLE_test(CONDITION) {si #SESSION{id_auteur}|oui}>
+					<INCLURE{fond=inclure/initiatives,id_auteur=#SESSION{id_auteur}} />
+				</BOUCLE_test>
+				[(#FORMULAIRE_LOGIN{#SELF})]
+				<//B_test>
 
 			</div><!--.content-->
 			<INCLURE{fond=inclure/mailchimp,env} />
