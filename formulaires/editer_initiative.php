@@ -168,18 +168,16 @@ function formulaires_editer_initiative_verifier_dist($id_initiative = 'new', $re
  */
 function formulaires_editer_initiative_traiter_dist($id_initiative = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	include_spip('action/editer_gis');
-
 	$retours = formulaires_editer_objet_traiter('initiative', $id_initiative, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
-	if (!_request('exec') AND $id_initiative == 'new') {
-		refuser_traiter_formulaire_ajax();
-		$redirect = parametre_url(
-				generer_url_public("initiative",'id_initiative=' . $retours['id_initiative'], true),
-				'editer', $retours['id_initiative'],
-				'&');
-				;
-		include_spip('inc/headers');
-		redirige_par_entete($redirect);
 
+	if (!_request('exec') AND $id_initiative == 'new') {
+		$id_initiative = $retours['id_initiative'];
+		refuser_traiter_formulaire_ajax();
+		$redirect = generer_url_entite($id_initiative,'initiative','editer=' . $id_initiative, true);
+		include_spip('inc/headers');
+		if($redirect) {
+			redirige_par_entete($redirect);
+		}
 	}
 	gis_modifier(_request('id_gis'), _request('styles_gis'));
 	return $retours;
