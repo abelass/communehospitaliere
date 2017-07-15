@@ -117,7 +117,7 @@ function formulaires_editer_initiative_verifier_dist($id_initiative = 'new', $re
 
 	$erreurs += formulaires_editer_objet_verifier('initiative', $id_initiative, array('id_gis', 'type_initiative', 'nom_contact', 'prenom_contact', 'email', 'telephone'));
 
-	// Ne pas réutiliser une copmmune.
+	// Ne pas réutiliser une commune.
 	if ($id_gis = _request('id_gis')) {
 		if ($id_initiative != 'new') {
 			$where = 'id_initiative !=' . $id_initiative . ' AND id_gis=' . $id_gis;
@@ -134,7 +134,7 @@ function formulaires_editer_initiative_verifier_dist($id_initiative = 'new', $re
 		}
 	}
 
-	// Définir les styles spñecifique dy type d'initiative pour le point gis.
+	// Définir les styles spécifique dy type d'initiative pour le point gis.
 	if ($type_initiative = _request('type_initiative')) {
 		include_spip('inc/communehospitaliere');
 		$definition_initiatives = ch_definitions_initiatives();
