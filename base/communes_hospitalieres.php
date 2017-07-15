@@ -65,15 +65,11 @@ function communes_hospitalieres_declarer_tables_objets_sql($tables) {
 			'KEY statut'         => 'statut',
 			'KEY id_gis'         => 'is_gis',
 		),
-		/*'join' => array(
-			'id_gis' => 'id_gis',
-		),*/
 		'titre' => 'titre AS titre, "" AS lang',
 		#'date' => '',
 		'champs_editables'  => array('titre', 'id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description', 'note'),
 		'champs_versionnes' => array('id_gis', 'type_initiative', 'date_conseil_communal', 'nom_contact', 'prenom_contact', 'email', 'telephone', 'description', 'note'),
 		'rechercher_champs' => array("titre" => 4, "id_gis" => 4, "type_initiative" => 5, "nom_contact" => 8, "prenom_contact" => 8, "description" => 6),
-		//'tables_jointures'  => array('spip_gis, spip_auteurs_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
