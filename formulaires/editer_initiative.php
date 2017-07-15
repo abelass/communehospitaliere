@@ -172,7 +172,6 @@ function formulaires_editer_initiative_traiter_dist($id_initiative = 'new', $ret
 
 	if (!_request('exec') AND $id_initiative == 'new') {
 		$id_initiative = $retours['id_initiative'];
-		refuser_traiter_formulaire_ajax();
 		$redirect = generer_url_entite($id_initiative,'initiative','editer=' . $id_initiative, true);
 		include_spip('inc/headers');
 		if($redirect) {
