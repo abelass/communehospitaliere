@@ -14,38 +14,40 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function ch_definitions_initiatives() {
+	include_spip('inc/config');
+	$config = lire_config('communes_hospitalieres');
 	$weight = 3;
-	$color = '#2e718e';
+	$color_defaut = isset($config['color']) ? $config['color'] : '#2e718e';
 	$opacity = 1;
 	$fillopacity = 0.5;
 	return array (
 		'contact' => array(
 			'label' =>_T('initiative:titre_type_initiative_contact'),
 			'styles' => array(
-				'color' => $color,
+				'color' => isset($config['color_contact']) ? $config['color_contact'] : $color_defaut,
 				'weight' => $weight,
 				'opacity' => $opacity,
-				'fillcolor' => '#ffffff',
+				'fillcolor' => isset($config['fillcolor_contact']) ? $config['fillcolor_contact'] :'#ffffff',
 				'opacity' => $fillopacity,
 			),
 		),
 		'interpellation' => array(
 			'label' => _T('initiative:titre_type_initiative_interpellation'),
 			'styles' => array(
-				'color' => $color,
+				'color' => isset($config['color_interpellation']) ? $config['color_interpellation'] : $color_defaut,
 				'weight' => $weight,
 				'opacity' => $opacity,
-				'fillcolor' => '#ffff00',
+				'fillcolor' => isset($config['fillcolor_interpellation']) ? $config['fillcolor_interpellation'] :'#ffff00',
 				'fillopacity' => $fillopacity,
 			),
 		),
 		'motion' => array(
 			'label' => _T('initiative:titre_type_initiative_motion'),
 			'styles' => array(
-				'color' => $color,
+				'color' => isset($config['color_motion']) ? $config['color_motion'] : $color_defaut,
 				'weight' => $weight,
 				'opacity' => $opacity,
-				'fillcolor' => '#008000',
+				'fillcolor' => isset($config['fillcolor_motion']) ? $config['fillcolor_motion'] : '#008000',
 				'fillopacity' => $fillopacity,
 			),
 		)

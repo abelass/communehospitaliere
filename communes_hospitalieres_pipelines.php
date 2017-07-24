@@ -75,8 +75,6 @@ function communes_hospitalieres_affiche_auteurs_interventions($flux) {
 }
 
 
-
-
 /**
  * Optimiser la base de données
  *
