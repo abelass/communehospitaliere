@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'communes_hospitalieres_titre' => 'Communes hospitalières',
 
 	// L
+	'label_actualiser_bd' => 'Actualiser la bd',
 	'label_couleur_bord' => 'Couleur du bord',
 	'label_fillcolor' => 'Couleur de fond',
 

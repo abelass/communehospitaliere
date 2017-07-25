@@ -111,9 +111,17 @@ function formulaires_configurer_communes_hospitalieres_saisies_dist() {
 								'nom' => 'color_bord',
 								'label' => _T('communes_hospitalieres:label_couleur_bord'),
 								'defaut' => $color_defaut
-							)
-						)
-					)
+							),
+						),
+						array(
+							'saisie' => 'oui_non',
+							'options' => array(
+								'nom' => 'actualiser_bd',
+								'label' => _T('communes_hospitalieres:label_actualiser_bd'),
+								'defaut' => 'rien',
+							),
+						),
+					),
 				),
 				array(
 					'saisie' => 'fieldset',
@@ -173,4 +181,37 @@ function formulaires_configurer_communes_hospitalieres_saisies_dist() {
 			),
 		),
 	);
+}
+
+
+function formulaires_configurer_communes_hospitalieres_verifier_dist() {
+	$erreurs = array();
+	if (_request('actualiser_bd')) {
+		include_spip('inc/communehospitaliere');
+
+		$sql = sql_select('id_gis,type_initiative', 'spip_initiatives');
+
+		$initiatives = array();
+		while($data = sql_fetch($sql)) {
+			$initiatives[$data['type_initiative']][] = $data['id_gis'];
+		}
+
+		$invalider_cache = FALSE;
+		foreach ($initiatives AS $type => $gis) {
+			spip_log($gis, 'teste');
+			$set = array(
+				'fillcolor' => _request('fillcolor_' . $type),
+				'color' => _request('color_' . $type),
+			);
+			if (count($gis) > 0) {
+				$invalider_cache = TRUE;
+				sql_updateq('spip_gis', $set, 'id_gis IN (' . implode(',', $gis) . ')');
+			}
+		}
+		if ($invalider_cache) {
+			include_spip('inc/invalideur');
+			suivre_invalideur('gis/id_gis');
+		}
+	}
+	return $erreurs;
 }
