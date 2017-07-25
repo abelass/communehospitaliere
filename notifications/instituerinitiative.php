@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // Fonction appelee par divers pipelines
 // http://code.spip.net/@notifications_instituerarticle_dist
-function notifications_instituernitiative_dist($quoi, $id_initiative, $options) {
+function notifications_instituerinitiative_dist($quoi, $id_initiative, $options) {
 
 	// ne devrait jamais se produire
 	if ($options['statut'] == $options['statut_ancien']) {
@@ -20,7 +20,12 @@ function notifications_instituernitiative_dist($quoi, $id_initiative, $options) 
 		return;
 	}
 
+	include_spip('inc/config');
 	include_spip('inc/texte');
+
+	$config = lire_config('communes_hospitalieres');
+	$from = lire_config('email_webmaster');
+
 
 	$modele = "";
 
@@ -32,7 +37,6 @@ function notifications_instituernitiative_dist($quoi, $id_initiative, $options) 
 		$dest = (isset($config['type_' . $config['type']]) and intval($config['type_' . $config['type']])) ? $config['type_' . $config['type']] : array(
 			1
 		);
-
 		$sql = sql_select('email', 'spip_auteurs', 'id_auteur IN (' . implode(',', $dest) . ')');
 
 		$destinataires = array();
@@ -48,8 +52,7 @@ function notifications_instituernitiative_dist($quoi, $id_initiative, $options) 
 			),
 			'data' => $destinataires
 		));
-
 		$texte = email_notification_objet($id_initiative, 'initiative', $modele);
-		notifications_envoyer_mails($destinataires, $texte);
+		notifications_envoyer_mails($destinataires, $texte, '', $from);
 	}
 }

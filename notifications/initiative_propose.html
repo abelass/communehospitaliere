@@ -6,18 +6,14 @@
 
 ][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
 <BOUCLE_art(INITIATIVES){id_initiative}{statut?}{tout}>
-#SET{auteurs,#LESAUTEURS}
+
 [(#VAL{info_propose_1}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
 
-<:info_propose_2:>
+Initiative proposé
 
-[(#VAL{info_propose_3}|_T{#ARRAY{titre,#TITRE}})]
-<:info_propose_4:>
-<:info_propose_5:>
-[(#ID_INITIATIVE|generer_url_entite{article,'','',0})]
+L'initiative "#TITRE" a été proposé à la publication: [(#ID_INITIATIVE|generer_url_entite{initiative,'','',0})]
 
-[** (#TITRE) **][(#GET{auteurs}|oui)
-[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#GET{auteurs}}})]][
+[** (#TITRE) **][
 (#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]})]
 
 [(#TEXTE|couper{700}|textebrut)]
