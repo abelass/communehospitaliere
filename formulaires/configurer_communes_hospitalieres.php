@@ -15,16 +15,6 @@ function formulaires_configurer_communes_hospitalieres_saisies_dist() {
 	$opacity = 1;
 	$fillopacity = 0.5;
 
-	// Notifications.
-	$choix_expediteurs = array(
-		'webmaster' => _T('reservation:notifications_expediteur_choix_webmaster'),
-		'administrateur' => _T('reservation:notifications_expediteur_choix_administrateur'),
-		'email' => _T('reservation:notifications_expediteur_choix_email')
-	);
-
-	if (defined('_DIR_PLUGIN_FACTEUR')) {
-		$choix_expediteurs['facteur'] = _T('reservation:notifications_expediteur_choix_facteur');
-	}
 
 	$types = array(
 		'contact' => array(
