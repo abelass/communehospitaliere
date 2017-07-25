@@ -118,7 +118,7 @@ function formulaires_configurer_communes_hospitalieres_saisies_dist() {
 							'options' => array(
 								'nom' => 'actualiser_bd',
 								'label' => _T('communes_hospitalieres:label_actualiser_bd'),
-								'defaut' => 'rien',
+								'defaut' => 'on',
 							),
 						),
 					),
