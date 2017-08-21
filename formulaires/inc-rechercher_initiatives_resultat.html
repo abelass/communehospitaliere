@@ -1,7 +1,20 @@
 #CACHE{0}
+#SET{initiatives,#ARRAY}
+<BOUCLE_initiatives(GIS){recherche ?} {par titre} >
+	<BOUCLE_initiative(INITIATIVES){id_gis=#ID_GIS}>
+	#SET{initiatives,#GET{initiatives}|array_merge{
+		#ARRAY{
+			#COMPTEUR_BOUCLE,#ARRAY{
+				titre,#TITRE,
+				code_postal,#CODE_POSTAL,
+				type_initiative,#TYPE_INITIATIVE|nom_type_initiative
+			}
+		}}}
+	</BOUCLE_initiative>
+</BOUCLE_initiatives>
 
-<B_initiatives>
-<B_initiative>
+<B_resultat_initiative>
+#ANCRE_PAGINATION
 <table class="spip margin-bottom-40">
 <thead>
 	<tr>
@@ -11,8 +24,7 @@
 	</tr>
 </thead>
 <tbody>
-<BOUCLE_initiatives(GIS){recherche ?} {par titre} >
-	<BOUCLE_initiative(INITIATIVES){id_gis=#ID_GIS}>
+<BOUCLE_resultat_initiative(DATA){source tableau,#GET{initiatives}} {pagination 10} >
 	<tr>
 		<td>
 			<a href="#URL_INITIATIVE">#TITRE</a>
@@ -20,18 +32,17 @@
 		<td>#CODE_POSTAL</td>
 		<td>
 	[<div class="champ contenu_type_initiative[ (#TYPE_INITIATIVE*|strlen|?{'',vide})]">
-		<span dir="#LANG_DIR" class="#EDIT{type_initiative} type_initiative">(#TYPE_INITIATIVE|nom_type_initiative)</span>
+		<span dir="#LANG_DIR" class="#EDIT{type_initiative} type_initiative">(#TYPE_INITIATIVE)</span>
 	</div>]
 		</td>
 	</tr>
-	</BOUCLE_initiative>
 
-</BOUCLE_initiatives>
+</BOUCLE_resultat_initiative>
 
 </tbody>
 </table>
-
-</B_initiatives>
+	[<p class="pagination">(#PAGINATION)</p>]
+</B_resultat_initiative>
 
 <p><strong><:recherche_resultat:></strong> <:aucune_donnee:> '#RECHERCHE'</p>
-<//B_initiatives>
+<//B_resultat_initiative>
