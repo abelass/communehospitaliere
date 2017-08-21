@@ -8,7 +8,7 @@
 				titre,#TITRE,
 				code_postal,#CODE_POSTAL,
 				id_initiative,#ID_INITIATIVE,
-				type_initiative,#TYPE_INITIATIVE|nom_type_initiative
+				type_initiative,#TYPE_INITIATIVE
 			}
 		}}}
 	</BOUCLE_initiative>
@@ -33,7 +33,7 @@
 		<td>#CODE_POSTAL</td>
 		<td>
 	[<div class="champ contenu_type_initiative[ (#TYPE_INITIATIVE*|strlen|?{'',vide})]">
-		<span dir="#LANG_DIR" class="type_initiative">(#TYPE_INITIATIVE)</span>
+		<span dir="#LANG_DIR" class="type_initiative">(#TYPE_INITIATIVE|nom_type_initiative)</span>
 	</div>]
 		</td>
 	</tr>
