@@ -45,7 +45,8 @@
 	<necessite nom="spip_gis_communes_belges" compatibilite="[1.0.1;]" />
 	<necessite nom="formulaireupload" compatibilite="[1.0.5;]" />
 	<necessite nom="couteau_suisse" compatibilite="[1.9.10;]" />
-
+	<necessite nom="iextras" compatibilite="[3.3.2;]" />
+	<necessite nom="titre_logo" compatibilite="[3.0.3;]" />
 
 	<pipeline nom="autoriser" inclure="communes_hospitalieres_autorisations.php" />
 
