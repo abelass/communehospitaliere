@@ -1,15 +1,37 @@
 #CACHE{0}
+
 <B_initiatives>
-<section class="liste articles sommaire">
-<BOUCLE_initiatives(GIS){recherche ?} {par titre}>
+<B_initiative>
+<table class="spip margin-bottom-40">
+<thead>
+	<tr>
+		<td>Commune</td>
+		<td>Code postal</td>
+		<td><:initiative:champ_type_initiative_label:></td>
+	</tr>
+</thead>
+<tbody>
+<BOUCLE_initiatives(GIS){recherche ?} {par titre} >
 	<BOUCLE_initiative(INITIATIVES){id_gis=#ID_GIS}>
-	<div>
-		<span class="titre">
+	<tr>
+		<td>
 			<a href="#URL_INITIATIVE">#TITRE</a>
-		</span>
-		<span class="code_postal">#CODE_POSTAL</span>
-	</div>
+		</td>
+		<td>#CODE_POSTAL</td>
+		<td>
+	[<div class="champ contenu_type_initiative[ (#TYPE_INITIATIVE*|strlen|?{'',vide})]">
+		<span dir="#LANG_DIR" class="#EDIT{type_initiative} type_initiative">(#TYPE_INITIATIVE|nom_type_initiative)</span>
+	</div>]
+		</td>
+	</tr>
 	</BOUCLE_initiative>
+
 </BOUCLE_initiatives>
-</section>
+
+</tbody>
+</table>
+
 </B_initiatives>
+
+<p><strong><:recherche_resultat:></strong> <:aucune_donnee:> '#RECHERCHE'</p>
+<//B_initiatives>
