@@ -7,6 +7,7 @@
 			#COMPTEUR_BOUCLE,#ARRAY{
 				titre,#TITRE,
 				code_postal,#CODE_POSTAL,
+				id_initiative,#ID_INITIATIVE,
 				type_initiative,#TYPE_INITIATIVE|nom_type_initiative
 			}
 		}}}
@@ -27,7 +28,7 @@
 <BOUCLE_resultat_initiative(DATA){source tableau,#GET{initiatives}} {pagination 10} >
 	<tr>
 		<td>
-			<a href="#URL_INITIATIVE">#TITRE</a>
+			<a href="#URL_INITIATIVE{#ID_INITIATIVE}">#TITRE</a>
 		</td>
 		<td>#CODE_POSTAL</td>
 		<td>
