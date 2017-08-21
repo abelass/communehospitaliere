@@ -115,7 +115,7 @@ function formulaires_editer_initiative_verifier_dist($id_initiative = 'new', $re
 	}
 
 
-	$erreurs += formulaires_editer_objet_verifier('initiative', $id_initiative, array('id_gis', 'type_initiative', 'nom_contact', 'prenom_contact', 'email', 'telephone'));
+	$erreurs += formulaires_editer_objet_verifier('initiative', $id_initiative, array('id_gis', 'type_initiative', 'email', 'telephone'));
 
 	// Ne pas réutiliser une commune.
 	if ($id_gis = _request('id_gis')) {
