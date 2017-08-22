@@ -148,8 +148,7 @@ function autoriser_initiative_modifier_dist($faire, $type, $id, $qui, $opt) {
 			'id_auteur=' . $qui['id_auteur'] . ' AND id_objet=' . sql_quote($id) . ' AND objet=' . sql_quote('initiative'));
 	$statut = sql_getfetsel("statut", "spip_initiatives", "id_initiative=" . sql_quote($id));
 
-	if (
-			$statut &&
+	if ($statut &&
 			($qui['statut'] == '0minirezo' or
 					((!isset($opt['statut']) or
 							$opt['statut'] !== 'publie') and
