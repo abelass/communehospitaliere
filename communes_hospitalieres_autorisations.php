@@ -164,8 +164,7 @@ function autoriser_initiative_modifier_dist($faire, $type, $id, $qui, $opt) {
 							)) and
 							$auteur
 							)
-					)
-			) {
+					)) {
 				$return = TRUE;
 			}
 
