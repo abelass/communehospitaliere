@@ -150,19 +150,14 @@ function autoriser_initiative_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	if ($statut &&
 			($qui['statut'] == '0minirezo' or
-					((!isset($opt['statut']) or
-							$opt['statut'] !== 'publie') and
-							in_array($qui['statut'], array(
-								'0minirezo',
-								'1comite',
-								'6forum'
-							)) and in_array($statut, array(
-								'prop',
-								'prepa',
-								'poubelle'
-							)) and
-							$auteur
-							)
+					(
+						in_array($qui['statut'], array(
+							'0minirezo',
+							'1comite',
+							'6forum'
+						)) and
+						$auteur
+						)
 					)) {
 				$return = TRUE;
 			}
