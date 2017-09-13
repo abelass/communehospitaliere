@@ -1,7 +1,7 @@
 <BOUCLE_art(INITIATIVES) {id_initiative ?}{id_mot ?}{0, #ENV{limit,1000}}{","}>
 	<BOUCLE_gis(GIS){id_gis}>
 	{"type": "Feature",
-["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
+		["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
 "id":"#ID_GIS",
 "properties": {
 	"title":[(#URL_INITIATIVE|lien_ou_expose{[(#TITRE_GIS*|sinon{#TITRE*}|extraire_multi|supprimer_numero)]}|json_encode)],
